@@ -18,7 +18,7 @@ pip install requests
 pip install beautifulsoup4
 
 # Pythonスクリプトを実行
-python auto-push.py
+python auto_push.py
 
 # 仮想環境をディアクティブにする
 deactivate

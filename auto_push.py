@@ -1,6 +1,7 @@
 import requests
 import os
 import time
+import git_command
 from bs4 import BeautifulSoup
 
 # 提出一覧取得URL
@@ -63,6 +64,9 @@ if len(submissions) != 0:
         # コードをファイルに書き込み
         with open(file_name, 'w') as file:
           file.write(code_content)
+        
+        # pushする
+        git_command.do_git_command()
         
         # codesへ戻る
         os.chdir('..')
