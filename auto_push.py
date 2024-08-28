@@ -3,19 +3,34 @@ import os
 import time
 import git_command
 from bs4 import BeautifulSoup
+from datetime import datetime, timedelta
+import pytz
 
 # 提出一覧取得URL
 GET_SUBMISSIONS_URL = "https://kenkoooo.com/atcoder/atcoder-api/v3/user/submissions"
 
 USER_ID = "isseistar0813"
-YESTERDAY = "1722438000"
 
 GET_CODE_URL = "https://atcoder.jp/contests/{contest_id}/submissions/{sub_id}"
 
+local_tz = pytz.timezone('Asia/Tokyo')
+
+now = datetime.now(local_tz)
+
+yesterday_start = now - timedelta(days=1)
+yesterday_start = yesterday_start.replace(hour=0, minute=0, second=0, microsecond=0)
+
+yesterday_start_utc = yesterday_start.astimezone(pytz.utc)
+
+epoch_start = datetime(1970, 1, 1, tzinfo=pytz.utc)
+epoch_seconds = int((yesterday_start_utc - epoch_start).total_seconds())
+
+YESTERDAY = epoch_seconds
 headers = {
     "Accept-Encoding": "gzip, deflate, br",
     "User-Agent": "python-requests/2.28.2"
 }
+
 
 response = requests.get(GET_SUBMISSIONS_URL, headers=headers, params={"user": USER_ID, "from_second": YESTERDAY})
 

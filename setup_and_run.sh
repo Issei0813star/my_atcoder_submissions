@@ -16,6 +16,7 @@ source "$VENV_DIR/bin/activate"
 pip install --upgrade pip
 pip install requests
 pip install beautifulsoup4
+pip install pytz
 
 # Pythonスクリプトを実行
 python auto_push.py
