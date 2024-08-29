@@ -18,8 +18,10 @@ pip install requests
 pip install beautifulsoup4
 pip install pytz
 
+echo "DIR_PROGRAMMING: $DIR_PROGRAMMING"
+
 # Pythonスクリプトを実行
-python auto_push.py
+python "$DIR_PROGRAMMING/auto-push-atcoder/auto_push.py"
 
 # 仮想環境をディアクティブにする
 deactivate

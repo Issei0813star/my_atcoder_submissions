@@ -38,9 +38,10 @@ submissions = response.json()
 
 if len(submissions) != 0:
   
+  dir_programming = os.getenv("DIR_PROGRAMMING")
+  
   # codesディレクトリへ移動
-  current_directory = os.getcwd()
-  codes_directory = os.path.join(current_directory, 'codes')
+  codes_directory = f"{dir_programming}/auto-push-atcoder/codes"
   os.chdir(codes_directory)
   
   for submission in submissions:
