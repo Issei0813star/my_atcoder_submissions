@@ -71,7 +71,7 @@ if len(submissions) != 0:
         code_content = pre_element.get_text()
         file_extension_mapping = {
           'java': '.java',
-          'cpp':'.cpp'
+          'c_cpp':'.cpp'
         }
         file_extension = file_extension_mapping.get(ace_mode, '.txt')
         problem_id = submission['problem_id']
