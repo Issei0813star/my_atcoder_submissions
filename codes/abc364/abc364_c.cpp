@@ -30,22 +30,22 @@ int main() {
     sort(spices.begin(), spices.end(), greater<>());
 
     ll sum_sweets = 0, sum_spices = 0;
-    ll count = 0;
+    ll countX = 0, countY =0;
 
     // 甘さとしょっぱさの両方の条件が超えるまで料理を食べる
-    for (ll i = 0; i < N; i++) {
-        sum_sweets += sweets[i];
-        sum_spices += spices[i];
-        count++;
-
-        // 甘さかしょっぱさのどちらかが限界を超えたら終了
-        if (sum_sweets > X || sum_spices > Y) {
-            break;
-        }
+    for (ll s : sweets) {
+        sum_sweets += s;
+        countX ++;
+        if(sum_sweets > X) break;
     }
 
-    // 結果出力
-    cout << count << endl;
+    for (ll s : spices) {
+        sum_spices += s;
+        countY ++;
+        if(sum_spices > Y) break;
+    }
+
+    cout << min(countX, countY) << endl;
 
     return 0;
 }
