@@ -1,25 +1,57 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
 using namespace std;
-using ll = long long;
+
 int main() {
-	ll n, x, y;
-	cin >> n >> x >> y;
-	vector<ll> a(n), b(n);
-	for (int i = 0; i < n; i++) cin >> a[i];
-	for (int i = 0; i < n; i++) cin >> b[i];
-	sort(a.begin(), a.end(), greater<>());
-	sort(b.begin(), b.end(), greater<>());
-	int c1 = 0, c2 = 0;
-	ll sx = 0, sy = 0;
-	for (int i = 0; i < n; i++) {
-		sx += a[i];
-		c1++;
-		if (sx > x) break;
-	}
-	for (int i = 0; i < n; i++) {
-		sy += b[i];
-		c2++;
-		if (sy > y) break;
-	}
-	cout << min(c1, c2) << '\n';
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int N;
+    cin >> N;
+
+    long long X, Y;
+    cin >> X >> Y;
+    
+    vector<long long> sweets(N), spices(N);
+
+    for (int i = 0; i < N; ++i) {
+        cin >> sweets[i];
+    }
+    for (int i = 0; i < N; ++i) {
+        cin >> spices[i];
+    }
+
+    // 大きい順に並べ替え
+    sort(sweets.begin(), sweets.end(), greater<>());
+    sort(spices.begin(), spices.end(), greater<>());
+
+    long long sum_sweets = 0;
+    long long sum_spices = 0;
+    int countX = 0;
+    int countY = 0;
+
+    // 甘さの合計がXを超えるまで料理を食べ続ける
+    for (int i = 0; i < N; ++i) {
+        sum_sweets += sweets[i];
+        countX++;
+        if (sum_sweets > X) {
+            break;
+        }
+    }
+
+    // しょっぱさの合計がYを超えるまで料理を食べ続ける
+    for (int i = 0; i < N; ++i) {
+        sum_spices += spices[i];
+        countY++;
+        if (sum_spices > Y) {
+            break;
+        }
+    }
+
+    // 甘さとしょっぱさのいずれかで制約を超える場合、最小の料理数を選ぶ
+    cout << min(countX, countY) << endl;
+
+    return 0;
 }
