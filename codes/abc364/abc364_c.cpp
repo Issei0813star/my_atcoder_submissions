@@ -4,22 +4,24 @@
 
 using namespace std;
 
+using ll = long long;
+
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    int N;
-    cin >> N;
+    ll N, X, Y;
+    cin >> N >> X >> Y;
 
-    long long X, Y;
-    cin >> X >> Y;
-    
-    vector<long long> sweets(N), spices(N);
+    vector<ll> sweets(N), spices(N);
 
-    for (int i = 0; i < N; ++i) {
+    // 甘さの入力
+    for (ll i = 0; i < N; i++) {
         cin >> sweets[i];
     }
-    for (int i = 0; i < N; ++i) {
+
+    // しょっぱさの入力
+    for (ll i = 0; i < N; i++) {
         cin >> spices[i];
     }
 
@@ -27,31 +29,23 @@ int main() {
     sort(sweets.begin(), sweets.end(), greater<>());
     sort(spices.begin(), spices.end(), greater<>());
 
-    long long sum_sweets = 0;
-    long long sum_spices = 0;
-    int countX = 0;
-    int countY = 0;
+    ll sum_sweets = 0, sum_spices = 0;
+    ll count = 0;
 
-    // 甘さの合計がXを超えるまで料理を食べ続ける
-    for (int i = 0; i < N; ++i) {
+    // 甘さとしょっぱさの両方の条件が超えるまで料理を食べる
+    for (ll i = 0; i < N; i++) {
         sum_sweets += sweets[i];
-        countX++;
-        if (sum_sweets > X) {
-            break;
-        }
-    }
-
-    // しょっぱさの合計がYを超えるまで料理を食べ続ける
-    for (int i = 0; i < N; ++i) {
         sum_spices += spices[i];
-        countY++;
-        if (sum_spices > Y) {
+        count++;
+
+        // 甘さかしょっぱさのどちらかが限界を超えたら終了
+        if (sum_sweets > X || sum_spices > Y) {
             break;
         }
     }
 
-    // 甘さとしょっぱさのいずれかで制約を超える場合、最小の料理数を選ぶ
-    cout << min(countX, countY) << endl;
+    // 結果出力
+    cout << count << endl;
 
     return 0;
 }
