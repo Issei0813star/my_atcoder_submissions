@@ -23,3 +23,17 @@ def do_git_command():
     git_add()
     git_commit(commit_message)
     git_push()
+
+def set_git_config(key, value, global_config=True):
+    # グローバルに設定する場合は '--global' オプションを追加
+    command = ['git', 'config']
+    if global_config:
+        command.append('--global')
+    command += [key, value]
+    
+    try:
+        subprocess.run(command, check=True)
+        print(f"Set {key} to {value} successfully.")
+    except subprocess.CalledProcessError as e:
+        print(f"Error setting {key}: {e}")
+
