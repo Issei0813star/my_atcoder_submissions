@@ -43,8 +43,8 @@ if len(submissions) != 0:
   git_user_name = os.getenv("USER_NAME_GIT")
   git_email = os.getenv("EMAIL_GIT")
   
-  git_command.set_git_config(git_user_name, 'Your Name')
-  git_command.set_git_config(git_email, 'your.email@example.com')
+  git_command.set_git_config('user.name', git_user_name)
+  git_command.set_git_config('user.email', git_email)
   
   # codesディレクトリへ移動
   codes_directory = f"{dir_programming}/auto-push-atcoder/codes"
